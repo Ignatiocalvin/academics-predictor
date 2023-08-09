@@ -1,14 +1,25 @@
 import os
 import sys
-from dataclasses import dataclass
-
 import numpy as np
 import pandas as pd
+from dataclasses import dataclass
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
+# allow imports when running script from within project dir
+# In general, just use sys.path.append() to add to the list of paths from which you can import resource
+from functools import reduce
+[sys.path.append(i) for i in ['.', '..']]
+
+# allow imports when running script from project dir parent dirs
+l = []
+script_path = os.path.split(sys.argv[0])
+for i in range(len(script_path)):
+  sys.path.append( reduce(os.path.join, script_path[:i+1]) )
+
+# Import modules from other files
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object

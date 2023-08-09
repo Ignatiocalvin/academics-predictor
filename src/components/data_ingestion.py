@@ -5,11 +5,22 @@
 
 import os
 import sys
-from dataclasses import dataclass
-
 import pandas as pd
+from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
 
+from functools import reduce
+# allow imports when running script from within project dir
+# In general, just use sys.path.append() to add to the list of paths from which you can import resource
+[sys.path.append(i) for i in ['.', '..']]
+
+# allow imports when running script from project dir parent dirs
+l = []
+script_path = os.path.split(sys.argv[0])
+for i in range(len(script_path)):
+  sys.path.append( reduce(os.path.join, script_path[:i+1]) )
+
+# Import modules from other files
 from src.components.data_transformation import (DataTransformation,
                                                 DataTransformationConfig)
 from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
