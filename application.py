@@ -45,5 +45,4 @@ def predict_datapoint():
             return render_template('home.html',results = e)
 
 if __name__=='__main__':
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port) # This is the port assigned by the beanstalk or AWS instance, if not provided by them any... else we use the 8080 port in the host to run our application. Rest the docker run 
+    app.run(host='0.0.0.0') # This is the port assigned by the beanstalk or AWS instance, if not provided by them any... else we use the 8080 port in the host to run our application. Rest the docker run 
